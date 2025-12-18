@@ -415,7 +415,7 @@ ${company}`;
         {/* Price > FV? */}
         <path d="M 400 230 L 500 280 L 400 330 L 300 280 Z" fill="#fbbf24" stroke="#92400e" strokeWidth="2"/>
         <text x="400" y="275" textAnchor="middle" fontSize="13" fontWeight="bold">Transaction Price</text>
-        <text x="400" y="295" textAnchor="middle" fontSize="13" fontWeight="bold">&gt; Fair Value?</text>
+        <text x="400" y="295" textAnchor="middle" fontSize="13" fontWeight="bold">> Fair Value?</text>
         
         {/* No excess */}
         <line x1="300" y1="280" x2="150" y2="280" stroke="#1e3a8a" strokeWidth="2" markerEnd="url(#arrowhead)"/>
@@ -580,7 +580,7 @@ ${company}`;
         
         <p><strong>6. Immature shares consideration (regardless of price):</strong></p>
         <ul>
-          <li>Shares held &lt;6 months are immature</li>
+          <li>Shares held < 6 months are immature</li>
           <li>Pattern of repurchase → Substantive liability</li>
           <li>Contingent repurchase when probable → Contingent liability</li>
         </ul>
@@ -827,7 +827,7 @@ ${company}`;
                   style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
                 >
                   <option value="">Select...</option>
-                  <option value="de_minimis">De Minimis (&lt;1-2%, no board seat)</option>
+                  <option value="de_minimis">De Minimis (<1-2%, no board seat)</option>
                   <option value="significant">Significant (≥3% or board influence)</option>
                 </select>
               </div>
@@ -865,7 +865,7 @@ ${company}`;
                     style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
                   >
                     <option value="">Select...</option>
-                    <option value="immature">Immature (&lt;6 months from vest/exercise)</option>
+                    <option value="immature">Immature (<6 months from vest/exercise)</option>
                     <option value="mature">Mature (≥6 months from vest/exercise)</option>
                     <option value="option">Unexercised Option</option>
                   </select>
@@ -1167,7 +1167,7 @@ ${company}`;
 
           <p><strong>De Minimis Economic Interest:</strong></p>
           <ul>
-            <li>Generally inconsequential ownership interest (&lt;1-2%)</li>
+            <li>Generally inconsequential ownership interest (<1-2%)</li>
             <li>No board representation or observer rights</li>
             <li>Not determinative alone - consider all facts and circumstances</li>
           </ul>
