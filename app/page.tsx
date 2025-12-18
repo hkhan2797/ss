@@ -23,7 +23,7 @@ const SecondaryMarketCalculator = () => {
     contingentEvent: ''
   });
 
-  const [analysis, setAnalysis] = useState(null);
+  const [analysis, setAnalysis] = useState<any>(null);
   const [activeTab, setActiveTab] = useState('input');
 
   const handleInputChange = (e: any) => {
