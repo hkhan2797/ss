@@ -1,4 +1,4 @@
-'use client'
+  'use client'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from 'recharts';
@@ -319,7 +319,7 @@ ${inputs.buyerType === 'entity' ?
   '• Entity is directly repurchasing shares: Any excess over fair value represents a distribution to the shareholder and should be recorded as a distribution/dividend rather than compensation expense.' :
   '• Third-party purchase: This is a transaction between shareholders with generally no accounting impact for the entity unless the entity provided consideration or facilitated the transaction in a manner that creates a liability.'}` :
 `Employee/Founder Seller Treatment:
-${analysis.reasoning.map(r => `• ${r.step}: ${r.conclusion}`).join('\n')}
+${analysis.reasoning.map((r: any) => `• ${r.step}: ${r.conclusion}`).join('\n')}
 
 ${analysis.isCompensatory ? 
 `COMPENSATORY CONCLUSION:
@@ -335,7 +335,7 @@ Per ASC 718-10-25-15, the accounting for share-based payment awards must reflect
 
 JOURNAL ENTRIES
 ${analysis.journalEntries.length > 0 ?
-  analysis.journalEntries.map(e => 
+  analysis.journalEntries.map((e: any) => 
     `${e.section ? `\n${e.section}\n` : ''}${e.account.padEnd(50)} $${e.amount.toFixed(2).padStart(12)}`
   ).join('\n') :
   'No journal entries required for this transaction.'}
@@ -1048,7 +1048,7 @@ ${company}`;
                   {/* Reasoning Steps */}
                   <div style={{ marginBottom: '20px' }}>
                     <h3 style={{ color: '#1e3a8a', fontSize: '1.2rem' }}>Analysis Steps</h3>
-                    {analysis.reasoning.map((step, idx) => (
+                    {analysis.reasoning.map((step: any), idx) => (
                       <div
                         key={idx}
                         style={{
@@ -1099,7 +1099,7 @@ ${company}`;
                         Journal Entries
                       </h3>
                       <div style={{ background: '#f8fafc', padding: '15px', borderRadius: '5px', fontFamily: 'monospace' }}>
-                        {analysis.journalEntries.map((entry, idx) => (
+                        {analysis.journalEntries.map((entry: any), idx) => (
                           <div key={idx} style={{ marginBottom: entry.section ? '15px' : '5px' }}>
                             {entry.section && (
                               <div style={{ fontWeight: 'bold', color: '#1e3a8a', marginBottom: '5px', fontFamily: 'Arial' }}>
