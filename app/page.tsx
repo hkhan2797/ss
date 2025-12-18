@@ -675,6 +675,7 @@ ${company}`;
 
       {activeTab === 'input' && (
         <div style={{ display: 'grid', gridTemplateColumns: window.innerWidth > 768 ? '1fr 1fr' : '1fr', gap: '30px' }}>
+          {/* Input Section */}
           <div style={{ background: 'white', padding: '25px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
             <h2 style={{ marginTop: 0, color: '#1e3a8a', fontSize: '1.5rem' }}>Transaction Details</h2>
             
@@ -823,137 +824,365 @@ ${company}`;
               </div>
             )}
 
-            {inputs.sellerType !== 'investor' && (
+            {inputs.sellerType{inputs.shareStatus === 'immature' && (
               <>
                 <div style={{ marginBottom: '20px' }}>
                   <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                    Share/Option Status
+                    Months Held Since Vest/Exercise
+                  </label>
+                  <input
+                    type="number"
+                    name="monthsHeld"
+                    value={inputs.monthsHeld}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 3"
+                    style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
+                    Previously Recognized Compensation Cost per Share ($)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    name="previouslyCost"
+                    value={inputs.previouslyCost}
+                    onChange={handleInputChange}
+                    placeholder="e.g., 4.00"
+                    style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
+                  />
+                </div>
+
+                <div style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
+                    Qualifies as Short-Term Inducement?
                   </label>
                   <select
-                    name="shareStatus"
-                    value={inputs.shareStatus}
+                    name="isShortTermInducement"
+                    value={inputs.isShortTermInducement}
                     onChange={handleInputChange}
                     style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
                   >
                     <option value="">Select...</option>
-                    <option value="immature">Immature (&lt;6 months from vest/exercise)</option>
-                    <option value="mature">Mature (≥6 months from vest/exercise)</option>
-                    <option value="option">Unexercised Option</option>
+                    <option value="yes">Yes (Limited offer period, first occurrence)</option>
+                    <option value="no">No</option>
                   </select>
                 </div>
 
-                {inputs.shareStatus === 'immature' && (
+                {inputs.isShortTermInducement === 'no' && (
                   <>
                     <div style={{ marginBottom: '20px' }}>
                       <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                        Months Held Since Vest/Exercise
-                      </label>
-                      <input
-                        type="number"
-                        name="monthsHeld"
-                        value={inputs.monthsHeld}
-                        onChange={handleInputChange}
-                        placeholder="e.g., 3"
-                        style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
-                      />
-                    </div>
-
-                    <div style={{ marginBottom: '20px' }}>
-                      <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                        Previously Recognized Compensation Cost per Share ($)
-                      </label>
-                      <input
-                        type="number"
-                        step="0.01"
-                        name="previouslyCost"
-                        value={inputs.previouslyCost}
-                        onChange={handleInputChange}
-                        placeholder="e.g., 4.00"
-                        style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
-                      />
-                    </div>
-
-                    <div style={{ marginBottom: '20px' }}>
-                      <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                        Qualifies as Short-Term Inducement?
+                        Pattern of Repurchasing Immature Shares?
                       </label>
                       <select
-                        name="isShortTermInducement"
-                        value={inputs.isShortTermInducement}
+                        name="hasPattern"
+                        value={inputs.hasPattern}
                         onChange={handleInputChange}
                         style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
                       >
                         <option value="">Select...</option>
-                        <option value="yes">Yes (Limited offer period, first occurrence)</option>
+                        <option value="yes">Yes (Multiple prior repurchases)</option>
                         <option value="no">No</option>
                       </select>
                     </div>
 
-                    {inputs.isShortTermInducement === 'no' && (
-                      <>
-                        <div style={{ marginBottom: '20px' }}>
-                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                            Pattern of Repurchasing Immature Shares?
-                          </label>
-                          <select
-                            name="hasPattern"
-                            value={inputs.hasPattern}
-                            onChange={handleInputChange}
-                            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
-                          >
-                            <option value="">Select...</option>
-                            <option value="yes">Yes (Multiple prior repurchases)</option>
-                            <option value="no">No</option>
-                          </select>
-                        </div>
-
-                        <div style={{ marginBottom: '20px' }}>
-                          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
-                            Contingent Repurchase Event Status
-                          </label>
-                          <select
-                            name="contingentEvent"
-                            value={inputs.contingentEvent}
-                            onChange={handleInputChange}
-                            style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
-                          >
-                            <option value="">Select...</option>
-                            <option value="probable">Probable (e.g., financing round closed)</option>
-                            <option value="not_probable">Not Probable</option>
-                            <option value="na">Not Applicable</option>
-                          </select>
-                        </div>
-                      </>
-                    )}
+                    <div style={{ marginBottom: '20px' }}>
+                      <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold', color: '#475569' }}>
+                        Contingent Repurchase Event Status
+                      </label>
+                      <select
+                        name="contingentEvent"
+                        value={inputs.contingentEvent}
+                        onChange={handleInputChange}
+                        style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #cbd5e1' }}
+                      >
+                        <option value="">Select...</option>
+                        <option value="probable">Probable (e.g., financing round closed)</option>
+                        <option value="not_probable">Not Probable</option>
+                        <option value="na">Not Applicable</option>
+                      </select>
+                    </div>
                   </>
                 )}
               </>
             )}
+          </>
+        )}
 
-            <button
-              onClick={analyzeTransaction}
-              style={{
-                width: '100%',
-                padding: '15px',
-                background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '5px',
-                fontSize: '1.1rem',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                marginTop: '10px'
-              }}
-            >
-              Analyze Transaction
-            </button>
-          </div>
+        <button
+          onClick={analyzeTransaction}
+          style={{
+            width: '100%',
+            padding: '15px',
+            background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            fontSize: '1.1rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            marginTop: '10px'
+          }}
+        >
+          Analyze Transaction
+        </button>
+      </div>
 
-          <div>
-            <div style={{ background: 'white', padding: '25px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
-              <h2 style={{ marginTop: 0, color: '#1e3a8a', fontSize: '1.5rem' }}>Analysis Results</h2>
+      {/* Results Section */}
+      <div>
+        <div style={{ background: 'white', padding: '25px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+          <h2 style={{ marginTop: 0, color: '#1e3a8a', fontSize: '1.5rem' }}>Analysis Results</h2>
+          
+          {analysis ? (
+            <>
+              <div style={{
+                background: analysis.isCompensatory ? '#fee2e2' : inputs.sellerType === 'investor' ? '#dbeafe' : '#dcfce7',
+                padding: '20px',
+                borderRadius: '8px',
+                marginBottom: '20px',
+                border: `2px solid ${analysis.isCompensatory ? '#dc2626' : inputs.sellerType === 'investor' ? '#3b82f6' : '#16a34a'}`
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px', flexWrap: 'wrap' }}>
+                  {analysis.isCompensatory ? (
+                    <AlertCircle size={24} color="#dc2626" />
+                  ) : inputs.sellerType === 'investor' ? (
+                    <Info size={24} color="#3b82f6" />
+                  ) : (
+                    <CheckCircle size={24} color="#16a34a" />
+                  )}
+                  <h3 style={{ margin: 0, color: analysis.isCompensatory ? '#dc2626' : inputs.sellerType === 'investor' ? '#1e3a8a' : '#16a34a' }}>
+                    {analysis.isCompensatory ? 'COMPENSATORY TRANSACTION' : 
+                     inputs.sellerType === 'investor' ? 'INVESTOR TRANSACTION' : 
+                     'NON-COMPENSATORY TRANSACTION'}
+                  </h3>
+                </div>
+                {analysis.isCompensatory && (
+                  <>
+                    <div style={{ fontSize: '0.9rem', color: '#475569', marginBottom: '5px' }}>
+                      Compensation Cost to Recognize:
+                    </div>
+                    <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#dc2626' }}>
+                      ${analysis.compensationAmount.toFixed(2)}
+                    </div>
+                    <div style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '5px' }}>
+                      Excess over FV: ${analysis.excessPerShare.toFixed(2)} per share
+                    </div>
+                  </>
+                )}
+                {inputs.sellerType === 'investor' && (
+                  <div style={{ fontSize: '0.9rem', color: '#475569', marginTop: '10px' }}>
+                    This is a capital/distribution transaction, not subject to ASC 718 compensation accounting.
+                  </div>
+                )}
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <h3 style={{ color: '#1e3a8a', fontSize: '1.2rem' }}>Transaction Summary</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div style={{ padding: '10px', background: '#f8fafc', borderRadius: '5px' }}>
+                    <div style={{ fontSize: '0.85rem', color: '#64748b' }}>Total Value</div>
+                    <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#334155' }}>
+                      ${analysis.totalTransactionValue.toFixed(2)}
+                    </div>
+                  </div>
+                  <div style={{ padding: '10px', background: '#f8fafc', borderRadius: '5px' }}>
+                    <div style={{ fontSize: '0.85rem', color: '#64748b' }}>Excess/Share</div>
+                    <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#334155' }}>
+                      ${analysis.excessPerShare.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ marginBottom: '20px' }}>
+                <h3 style={{ color: '#1e3a8a', fontSize: '1.2rem' }}>Analysis Steps</h3>
+                {analysis.reasoning.map((step, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      padding: '15px',
+                      background: step.isAlert ? '#fef3c7' : '#f1f5f9',
+                      borderRadius: '5px',
+                      marginBottom: '10px',
+                      borderLeft: `4px solid ${step.isAlert ? '#f59e0b' : '#64748b'}`
+                    }}
+                  >
+                    <div style={{ fontWeight: 'bold', color: '#1e3a8a', marginBottom: '5px' }}>
+                      {step.step}
+                    </div>
+                    <div style={{ fontSize: '0.9rem', color: '#475569' }}>
+                      {step.conclusion}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {analysis.requiresReclassification && (
+                <div style={{
+                  padding: '15px',
+                  background: '#fee2e2',
+                  borderRadius: '8px',
+                  marginBottom: '20px',
+                  border: '2px solid #dc2626'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                    <AlertCircle size={20} color="#dc2626" />
+                    <h3 style={{ margin: 0, color: '#dc2626' }}>Classification Change Required</h3>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#475569' }}>
+                    {analysis.reclassificationReason}
+                  </p>
+                  <p style={{ margin: '10px 0 0 0', fontSize: '0.85rem', color: '#64748b', fontStyle: 'italic' }}>
+                    Awards must be reclassified from equity to liability and remeasured at fair value each period.
+                  </p>
+                </div>
+              )}
+
+              {analysis.journalEntries.length > 0 && (
+                <div style={{ marginBottom: '20px' }}>
+                  <h3 style={{ color: '#1e3a8a', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <FileText size={20} />
+                    Journal Entries
+                  </h3>
+                  <div style={{ background: '#f8fafc', padding: '15px', borderRadius: '5px', fontFamily: 'monospace', fontSize: '0.85rem' }}>
+                    {analysis.journalEntries.map((entry, idx) => (
+                      <div key={idx} style={{ marginBottom: entry.section ? '15px' : '5px' }}>
+                        {entry.section && (
+                          <div style={{ fontWeight: 'bold', color: '#1e3a8a', marginBottom: '5px', fontFamily: 'Arial' }}>
+                            {entry.section}
+                          </div>
+                        )}
+                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '10px' }}>
+                          <span>{entry.account}</span>
+                          <span style={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>${entry.amount.toFixed(2)}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <div style={{ textAlign: 'center', padding: '60px 20px', color: '#94a3b8' }}>
+              <FileText size={48} style={{ marginBottom: '20px', opacity: 0.5 }} />
+              <p>Complete the transaction details and click "Analyze Transaction" to see results</p>
+            </div>
+          )}
+        </div>
+
+        {renderDecisionTree()}
+      </div>
+    </div>
+  )}
+
+  <div style={{ marginTop: '30px', background: 'white', padding: '25px', borderRadius: '10px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
+    <h3 style={{ marginTop: 0, color: '#1e3a8a' }}>Key Considerations</h3>
+    <div style={{ fontSize: '0.9rem', color: '#475569', lineHeight: '1.8' }}>
+      <p><strong>Seller Type Considerations:</strong></p>
+      <ul>
+        <li><strong>Employees/Founders:</strong> Subject to ASC 718 analysis; excess over FV may be compensatory</li>
+        <li><strong>Investors:</strong> Not subject to ASC 718; treated as capital/distribution transactions</li>
+      </ul>
+
+      <p><strong>Entity Facilitation Indicators:</strong></p>
+      <ul>
+        <li>Connecting buyers and sellers or providing shareholder lists</li>
+        <li>Determining which buyers/sellers can participate</li>
+        <li>Dictating number of shares that can be sold</li>
+        <li>Negotiating or suggesting a price</li>
+        <li>Agreeing to change share rights</li>
+        <li>Providing non-publicly available information</li>
+      </ul>
+
+      <p><strong>Immature Shares (ASC 718-10-25-9):</strong></p>
+      <ul>
+        <li>Shares held less than 6 months from vesting (shares) or exercise (options)</li>
+        <li>Options are never considered mature</li>
+        <li>Repurchase requires classification assessment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style={{ marginTop: '20px', background: '#fffbeb', padding: '20px', borderRadius: '10px', border: '1px solid #fbbf24' }}>
+    <h4 style={{ marginTop: 0, color: '#92400e', display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <Info size={20} />
+      Disclosure Considerations
+    </h4>
+    <div style={{ fontSize: '0.9rem', color: '#78350f', lineHeight: '1.6' }}>
+      <p>Entities must consider disclosure requirements under:</p>
+      <ul style={{ marginBottom: 0 }}>
+        <li><strong>ASC 718:</strong> Stock compensation disclosures</li>
+        <li><strong>ASC 850:</strong> Related party disclosures</li>
+        <li><strong>SEC Requirements:</strong> For IPO/SPAC registration statements</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style={{ marginTop: '20px', padding: '15px', background: '#f1f5f9', borderRadius: '5px', fontSize: '0.85rem', color: '#475569', textAlign: 'center' }}>
+    © 2024 PrimeBooks Consulting LLC | This tool is for educational and analytical purposes. Consult with qualified accounting professionals for specific guidance.
+  </div>
+</div>---
+
+## 9. `README.md`
+````markdown
+# Secondary Market Transaction Analyzer
+
+Professional ASC 718 compliance tool for analyzing secondary market transactions and calculating compensation expense.
+
+![Next.js](https://img.shields.io/badge/Next.js-14.0.4-black)
+![React](https://img.shields.io/badge/React-18.2.0-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+## 🚀 Features
+
+- ✅ Complete ASC 718 decision tree analysis
+- ✅ Visual flowchart of decision framework
+- ✅ Automated compensation cost calculation
+- ✅ Classification assessment for immature shares
+- ✅ Professional accounting memo generation
+- ✅ Support for investor vs. employee seller scenarios
+- ✅ Journal entry recommendations
+- ✅ Downloadable documentation
+
+## 📦 Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **UI Library:** React 18
+- **Charts:** Recharts
+- **Icons:** Lucide React
+- **Styling:** Inline styles (no build dependencies)
+- **Deployment:** Optimized for Vercel
+
+## 🛠️ Installation
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/secondary-market-analyzer.git
+cd secondary-market-analyzer
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Open http://localhost:3000
+```
+
+## 📁 Project Structure
+````
+secondary-market-analyzer/
+├── app/
+│   ├── layout.js          # Root layout
+│   ├── page.js            # Home page
+│   └── globals.css        # Global styles
+├── components/
+│   └── SecondaryMarketCalculator.jsx  # Main component
+├── public/                # Static assets
+├── .gitignore
+├── package.json
+├── next.config.mjs
+└── README.md
               
-              {analysis ? (
-                <>
-                  <div style={{
-                    background: analysis.isCompensatory ? '#fee2e2' : inputs.sellerType === 'investor' ? '#dbeafe
