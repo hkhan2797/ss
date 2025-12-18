@@ -1,4 +1,5 @@
 'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, BarChart, Bar, ResponsiveContainer } from 'recharts';
 import { AlertCircle, CheckCircle, Info, FileText, Download, GitBranch } from 'lucide-react';
@@ -25,7 +26,7 @@ const SecondaryMarketCalculator = () => {
   const [analysis, setAnalysis] = useState(null);
   const [activeTab, setActiveTab] = useState('input');
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setInputs(prev => ({ ...prev, [name]: value }));
   };
